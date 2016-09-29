@@ -13,6 +13,7 @@ export default class App extends Component {
    }
 
    componentDidMount(){
+
      this.sampleData = {
      "main": [
        {
@@ -119,27 +120,47 @@ export default class App extends Component {
   }
 
   submit(e){
-
-    if(e.keyCode==13 || e==true){
-      //Enter key pressed
-      let result = [];
-      let searchValue = this.searchBar.value;
-      this.sampleData.main.map((record)=>{
-        for(let x in record){
-          if(record[x].delimiters.hasOwnProperty(searchValue))
-            result.push(x+' = '+record[x].delimiters[searchValue]);
-        }
-      });
-      if(result.length==0){
-        result.push('no data found');
-      }
-      this.setState({results:result});
+  let searchValue="";
+    //console.log('event',typeof(e) === 'boolean');
+    if(typeof(e) === 'boolean')
+    {
+      searchValue = this.searchBar.value;
+      this.searchProp(searchValue);
+    }
+    else if(e.target.value && e.type =='change'){
+      searchValue = e.target.value;
+      console.log('log is ');
+      this.searchProp(searchValue);
+    }
+    else if(e.keyCode==13 ){
+      searchValue = this.searchBar.value;
+      this.searchProp(searchValue);
     }
 }
 
+searchProp(str){
+  let result = [];
+
+
+  this.sampleData.main.map((record)=>{
+    for(let x in record){
+      if(record[x].delimiters.hasOwnProperty(str)){
+        result.push(x+' = '+record[x].delimiters[str]);
+
+      }
+
+    }
+  });
+  if(result.length==0){
+    result.push('no data found');
+  }
+  this.setState({results:result,inputText:str});
+}
+
+
   render() {
 
-    let results = this.state.results.length>0?<SearchResults results={this.state.results} />:null;
+    let results = this.state.results.length>0?<SearchResults results={this.state.results} searchStr={this.state.inputText}/>:null;
     return (
       <div className="container-main">
       <h1 className="heading-center">Search Property</h1>
@@ -147,10 +168,12 @@ export default class App extends Component {
       <div  className="centered-div">
         <input className="search-box" placeholder="Enter Property to serach" name="inputBox" type="text"  onKeyDown={this.submit.bind(this)} ref={(ref) => this.searchBar = ref} />
         <input className="btn" type="button" value="Search" onClick={this.submit.bind(this,true)} />
+                <h4 className="heading-center">(Hint: Enter after Finish or click on search button)</h4>
+        <h4>OR</h4>
+        <SearchComponent onChange={this.submit.bind(this)} />
 
-        
 
-        <h4 className="heading-center">(Hint: Enter after Finish or click on search button)</h4>
+
         {results}
       </div>
       </div>

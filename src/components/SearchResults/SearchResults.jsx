@@ -8,7 +8,8 @@ export default class SearchResults extends Component {
 
    renderRow (){
      let item = [];
-      item.push(<li key="1" >Result: </li>);
+     
+      item.push(<li key="1" >Results for {this.props.searchStr}: </li>);
        this.props.results.map((row)=> {
          item.push(<li key={row}>{row}</li>);
       });
