@@ -6,8 +6,9 @@ export default class App extends Component {
 
    constructor(props){
      super();
-     this.state = {inputText:undefined };
+     this.state = {inputText:undefined ,results:'thi si result'};
      this.sampleData=undefined;
+
    }
 
    componentDidMount(){
@@ -71,11 +72,11 @@ export default class App extends Component {
 
   checkData(){
     let searchValue = this.searchBar.value;
-    // console.log('sample data ',this.state.data);
+
     console.log('sample data ',this.sampleData);
     let result = "";
     this.sampleData.main.map((record)=>{
-      // console.log('this is start',record);
+
       for(let x in record){
         if(record[x].delimiters.hasOwnProperty(searchValue))
           result += x+'='+record[x].delimiters[searchValue]+",";
@@ -83,6 +84,7 @@ export default class App extends Component {
       }
 
     });
+
   }
 
   addInput(){
@@ -91,9 +93,7 @@ export default class App extends Component {
   }
 
   shouldComponentUpdate(newProps, newState) {
-      console.log('shouldComponentUpdate');
-      this.renderOptions();
-       return this.state !== newState;
+      return this.state !== newState;
 
     }
 
@@ -121,17 +121,19 @@ export default class App extends Component {
 
 
   render() {
-
+    let results = this.state.results;
     return (
       <div>
       <h1>Property name is case sensitive</h1>
         <input name="inputBox" type="text"  ref={(ref) => this.searchBar = ref} onChange={ this.checkData.bind(this)} />
         <select>
-          {this.renderOptions()
+          {
+            // this.renderOptions()
           }
         </select>
           <input type="button" value="+" onClick={this.addInput.bind(this)} />
         <div>
+
         </div>
       </div>
     );
