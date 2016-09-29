@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 
 
-let sampleData
+
 export default class SearchResults extends Component {
 
    constructor(props){
      super(props);
-   }
+  }
 
-
+   renderRow (){
+     let item = [];
+    item.push(<li key="1" >Result: </li>);
+     this.props.results.map((row)=> {
+       item.push(<li key={row}>{row}</li>);
+    });
+   return item;
+   };
 
 
   render() {
-    let results = this.state.results;
     return (
-      <div>
-      <ui>
-        {<li></li>}
-      </ui>
-
+      <div className="search-container table">
+        <ul className="horizontal-list">
+          {this.renderRow()}
+        </ul>
       </div>
     );
   }

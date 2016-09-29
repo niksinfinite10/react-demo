@@ -1,4 +1,4 @@
-import App from './SearchResults';
+import SearchResults from './SearchResults';
 
 export {
   SearchResults

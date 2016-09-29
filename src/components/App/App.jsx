@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { SearchComponent }  from '../SearchComponent';
+import { SearchResults }  from '../SearchResults';
 
 
-let sampleData
 export default class App extends Component {
 
    constructor(props){
      super();
-     this.state = {inputText:undefined ,results:'thi si result'};
+     this.state = {inputText:undefined ,results:[]};
      this.sampleData=undefined;
 
    }
@@ -70,31 +71,17 @@ export default class App extends Component {
    }
 
 
-  checkData(){
-    let searchValue = this.searchBar.value;
-
-    console.log('sample data ',this.sampleData);
-    let result = "";
-    this.sampleData.main.map((record)=>{
-
-      for(let x in record){
-        if(record[x].delimiters.hasOwnProperty(searchValue))
-          result += x+'='+record[x].delimiters[searchValue]+",";
-        console.log(result);
-      }
-
-    });
-
-  }
+//   checkData(){
+//     let searchValue = this.searchBar.value;
+//
+// }
 
   addInput(){
-
-
+    console.log('add input');
   }
 
   shouldComponentUpdate(newProps, newState) {
       return this.state !== newState;
-
     }
 
   renderOptions(){
@@ -116,25 +103,38 @@ export default class App extends Component {
   componentWillUpdate(){
     this.renderOptions();
     console.log('componentWillUpdate');
-
   }
 
+  submit(e){
+    console.log('asd');
+    if(e.keyCode==13){
+      //Enter key pressed
+      let result = [];
+      let searchValue = this.searchBar.value;
+      this.sampleData.main.map((record)=>{
+        for(let x in record){
+          if(record[x].delimiters.hasOwnProperty(searchValue))
+            result.push(x+' = '+record[x].delimiters[searchValue]);
+        }
+      });
+      this.setState({results:result});
+    }
+}
 
   render() {
-    let results = this.state.results;
+    // let results = this.state.results;
+    let results = this.state.results.length>0?<SearchResults results={this.state.results} />:'sda';
     return (
-      <div>
-      <h1>Property name is case sensitive</h1>
-        <input name="inputBox" type="text"  ref={(ref) => this.searchBar = ref} onChange={ this.checkData.bind(this)} />
-        <select>
-          {
-            // this.renderOptions()
-          }
-        </select>
-          <input type="button" value="+" onClick={this.addInput.bind(this)} />
-        <div>
+      <div className="container-main" style={{width:'50%',margin:'auto'}}>
+      <h1 style={{textAlign:'center'}}>(Hit: Enter after Finish)</h1>
+      <div  style={{margin:'auto',textAlign:'center'}}>
+        <input name="inputBox" type="text" value="quotationStart" onKeyDown={this.submit.bind(this)} ref={(ref) => this.searchBar = ref} />
+        <input type="button" value="Add more" onClick={this.addInput.bind(this)} />
 
-        </div>
+          {this.state.result?"Result: "+this.state.result:null}
+          {results}
+
+      </div>
       </div>
     );
   }
