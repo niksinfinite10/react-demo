@@ -145,7 +145,7 @@ export default class App extends Component {
       <h1 className="heading-center">Search Property</h1>
 
       <div  className="centered-div">
-        <input className="search-box" name="inputBox" type="text"  onKeyDown={this.submit.bind(this)} ref={(ref) => this.searchBar = ref} />
+        <input className="search-box" placeholder="Enter Property to serach" name="inputBox" type="text"  onKeyDown={this.submit.bind(this)} ref={(ref) => this.searchBar = ref} />
         <input className="btn" type="button" value="Search" onClick={this.submit.bind(this,true)} />
         <h4 className="heading-center">(Hint: Enter after Finish or click on search button)</h4>
         {results}
