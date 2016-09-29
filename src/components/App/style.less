@@ -1,8 +1,5 @@
-body {
-  color: black;
-}
 
-input[type=text] {
+.search-box {
 
     padding: 12px 20px;
     margin: 8px 0;
@@ -12,12 +9,11 @@ input[type=text] {
     transition: 0.5s;
     outline: none;
 }
-
-input[type=button]:hover {
-background-color: #426ef4; /* Green */
+.search-box:focus {
+    border: 1px solid #555;
 }
 
-input[type=button] {
+.btn{
  background-color: #4285f4; /* Green */
  border: none;
  outline: none;
@@ -29,11 +25,22 @@ input[type=button] {
  display: inline-block;
  font-size: 16px;
 }
-
-input[type=text]:focus {
-    border: 1px solid #555;
+.btn:hover {
+background-color: #426ef4; /* Green */
 }
-.container-main{
+.heading-center{
+  text-align:center;
+  color:#4285f4;
+}
 
+
+.container-main{
+    width:50%;
+    margin:auto;
     box-shadow: 1px 1px 5px #888888;
+}
+
+.centered-div{
+  margin:auto;
+  text-align:center;
 }

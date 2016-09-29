@@ -119,8 +119,8 @@ export default class App extends Component {
   }
 
   submit(e){
-    console.log('asd');
-    if(e.keyCode==13){
+
+    if(e.keyCode==13 || e==true){
       //Enter key pressed
       let result = [];
       let searchValue = this.searchBar.value;
@@ -141,11 +141,13 @@ export default class App extends Component {
 
     let results = this.state.results.length>0?<SearchResults results={this.state.results} />:null;
     return (
-      <div className="container-main" style={{width:'50%',margin:'auto'}}>
-      <h1 style={{textAlign:'center'}}>(Hit: Enter after Finish)</h1>
-      <div  style={{margin:'auto',textAlign:'center'}}>
-        <input name="inputBox" type="text"  onKeyDown={this.submit.bind(this)} ref={(ref) => this.searchBar = ref} />
-        <input type="button" value="Add more" onClick={this.addInput.bind(this)} />
+      <div className="container-main">
+      <h1 className="heading-center">Search Property</h1>
+
+      <div  className="centered-div">
+        <input className="search-box" name="inputBox" type="text"  onKeyDown={this.submit.bind(this)} ref={(ref) => this.searchBar = ref} />
+        <input className="btn" type="button" value="Search" onClick={this.submit.bind(this,true)} />
+        <h4 className="heading-center">(Hit: Enter after Finish or click on search button)</h4>
         {results}
       </div>
       </div>
