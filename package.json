@@ -23,7 +23,7 @@
   "dependencies": {
     "react": "^15.0.2"
   },
-  "license": "",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.8.0",
