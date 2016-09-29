@@ -16,14 +16,11 @@
     "build": "rimraf ./dist && webpack",
     "deploy": "rimraf ./build && NODE_ENV=production webpack -p --config webpack.prd.config.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fondadam2016/reactjs-init"
-  },
+
   "dependencies": {
     "react": "^15.0.2"
   },
-  "license": "MIT",
+
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.8.0",
