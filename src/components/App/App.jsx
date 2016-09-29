@@ -5,7 +5,7 @@ import { SearchResults }  from '../SearchResults';
 
 export default class App extends Component {
 
-   constructor(props){
+  constructor(props){
      super();
      this.state = {inputText:undefined ,results:[]};
      this.sampleData=undefined;
@@ -61,7 +61,25 @@ export default class App extends Component {
            "alternateQuotationStart": "“",
            "alternateQuotationEnd": "”"
          }
-       }}
+       }},
+       {
+    "ar-MR": {
+      "identity": {
+        "version": {
+          "_number": "$Revision: 12217 $",
+          "_cldrVersion": "29"
+        },
+        "language": "ar",
+        "territory": "MR"
+      },
+      "delimiters": {
+        "quotationStart": "”",
+        "quotationEnd": "“",
+        "alternateQuotationStart": "’",
+        "alternateQuotationEnd": "‘"
+      }
+    }
+  }
 
      ]
    };
@@ -70,11 +88,6 @@ export default class App extends Component {
 
    }
 
-
-//   checkData(){
-//     let searchValue = this.searchBar.value;
-//
-// }
 
   addInput(){
     console.log('add input');
@@ -117,23 +130,23 @@ export default class App extends Component {
             result.push(x+' = '+record[x].delimiters[searchValue]);
         }
       });
+      if(result.length==0){
+        result.push('no data found');
+      }
       this.setState({results:result});
     }
 }
 
   render() {
-    // let results = this.state.results;
-    let results = this.state.results.length>0?<SearchResults results={this.state.results} />:'sda';
+
+    let results = this.state.results.length>0?<SearchResults results={this.state.results} />:null;
     return (
       <div className="container-main" style={{width:'50%',margin:'auto'}}>
       <h1 style={{textAlign:'center'}}>(Hit: Enter after Finish)</h1>
       <div  style={{margin:'auto',textAlign:'center'}}>
-        <input name="inputBox" type="text" value="quotationStart" onKeyDown={this.submit.bind(this)} ref={(ref) => this.searchBar = ref} />
+        <input name="inputBox" type="text"  onKeyDown={this.submit.bind(this)} ref={(ref) => this.searchBar = ref} />
         <input type="button" value="Add more" onClick={this.addInput.bind(this)} />
-
-          {this.state.result?"Result: "+this.state.result:null}
-          {results}
-
+        {results}
       </div>
       </div>
     );

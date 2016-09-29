@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-
-
 export default class SearchResults extends Component {
 
    constructor(props){
@@ -10,10 +8,10 @@ export default class SearchResults extends Component {
 
    renderRow (){
      let item = [];
-    item.push(<li key="1" >Result: </li>);
-     this.props.results.map((row)=> {
-       item.push(<li key={row}>{row}</li>);
-    });
+      item.push(<li key="1" >Result: </li>);
+       this.props.results.map((row)=> {
+         item.push(<li key={row}>{row}</li>);
+      });
    return item;
    };
 

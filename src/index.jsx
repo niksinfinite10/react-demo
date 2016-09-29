@@ -5,4 +5,3 @@ import { App } from './components/App';
 import './style.less';
 
 render(<App />, document.getElementById('container'));
-
